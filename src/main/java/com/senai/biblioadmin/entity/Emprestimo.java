@@ -6,8 +6,8 @@ package com.senai.biblioadmin.entity;
 
 /**
  *
- * @author eduardo_cambraia
+ * @author joao_cappeletti
  */
-public class LivroEntity {
+public class Emprestimo {
     
 }
