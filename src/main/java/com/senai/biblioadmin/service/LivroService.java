@@ -8,6 +8,6 @@ package com.senai.biblioadmin.service;
  *
  * @author eduardo_cambraia
  */
-public class LivroEntity {
+public class LivroService {
     
 }
