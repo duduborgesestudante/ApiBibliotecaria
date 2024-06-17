@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.senai.biblioadmin.repository;
 
-/**
- *
- * @author eduardo_cambraia
- */
-public class LivroRepository {
+import com.senai.biblioadmin.entity.Estudante;
+import com.senai.biblioadmin.entity.Livro;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LivroRepository extends JpaRepository<Livro,Long> {
+    
+    Estudante findByTitulo(String titulo);
     
 }
