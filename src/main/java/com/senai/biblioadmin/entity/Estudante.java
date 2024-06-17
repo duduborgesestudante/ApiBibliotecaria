@@ -1,10 +1,35 @@
 
 package com.senai.biblioadmin.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="estudantes")
 public class Estudante {
+    
+    @Id 
+    @OneToMany
+    private Long IdEstudante;
+    
+    @Column(nullable=false)
+    private String nome;
+    
+    @Column(nullable=false)
+    private Long matricula;
+    
+    @Column(nullable=false)
+    private Long email;
+    
+    @Column(nullable=true)
+    private String telefone;
+    
+    @Column(nullable=false)
+    private String senha;
+    
 
     public Long getIdEstudante() {
         return IdEstudante;
@@ -53,17 +78,5 @@ public class Estudante {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    private Long IdEstudante;
-    
-    private String nome;
-    
-    private Long matricula;
-    
-    private Long email;
-    
-    private String telefone;
-
-    private String senha;
     
 }
