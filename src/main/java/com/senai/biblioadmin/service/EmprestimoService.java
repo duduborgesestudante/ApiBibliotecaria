@@ -57,31 +57,34 @@ public class EmprestimoService {
     
     public boolean alterarEmprestimo(Emprestimo emprestimo){
 
-        if(cliente.getNome() == null || cliente.getNome() == ""){
+        if(emprestimo.getLivro() == null ){
             return false;
         }
-        if(cliente.getEmail() == null || cliente.getEmail() == ""){
+        if(emprestimo.getMatricula() == null ){
             return false;
         }
-        if(cliente.getCpf() == null ||
-           cliente.getCpf() == "" ||
-           cliente.getCpf().length() != 11 ||
-           ! cliente.getCpf().chars().allMatch(Character::isDigit)){
+        if(emprestimo.getIdEmprestimo() == null ){
+            return false;
+        }
+        if(emprestimo.getEstudante() == null ){
+            return false;
+        }
+        if(emprestimo.getDevolucao() == null || emprestimo.getDevolucao() == ""){
             return false;
         }
         
-        Cliente cliBD = clienteRepository.getReferenceById(cliente.getIdCliente());
-        if( cliBD != null){
-            if(cliBD.getCpf() != cliente.getCpf() &&
-                clienteRepository.findByCpf(cliente.getCpf()) != null){
+        Emprestimo empBD = emprestimoRepository.getReferenceById(emprestimo.getIdEmprestimo());
+        if( empBD != null){
+            if(empBD.getIdEmprestimo() != emprestimo.getIdEmprestimo() &&
+                emprestimoRepository.findById(emprestimo.getIdEmprestimo()) != null){
                 return false;
             }
-            cliBD.setCelular(cliente.getCelular());
-            cliBD.setCpf(cliente.getCpf());
-            cliBD.setEmail(cliente.getEmail());
-            cliBD.setNascimento(cliente.getNascimento());
-            cliBD.setNome(cliente.getNome());
-            clienteRepository.save(cliBD);
+            empBD.setLivro(emprestimo.getLivro());
+            empBD.setMatricula(emprestimo.getMatricula());
+            empBD.setIdEmprestimo(emprestimo.getIdEmprestimo());
+            empBD.setEstudante(emprestimo.getEstudante());
+            empBD.setDevolucao(emprestimo.getDevolucao());
+            emprestimoRepository.save(empBD);
             return true;           
             }
             return false;
