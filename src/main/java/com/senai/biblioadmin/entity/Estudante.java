@@ -22,7 +22,7 @@ public class Estudante {
     private Long matricula;
     
     @Column(nullable=false)
-    private Long email;
+    private String email;
     
     @Column(nullable=true)
     private String telefone;
@@ -55,11 +55,11 @@ public class Estudante {
         this.matricula = matricula;
     }
 
-    public Long getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Long email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
