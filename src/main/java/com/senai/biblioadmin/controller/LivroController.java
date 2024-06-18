@@ -1,13 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.senai.biblioadmin.controller;
 
-/**
- *
- * @author eduardo_cambraia
- */
+import com.senai.biblioadmin.entity.Livro;
+import com.senai.biblioadmin.service.LivroService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class LivroController {
+    
+    @Autowired
+    private LivroService livroService;
+    
+    
+    @GetMapping("/livro")
+    public ResponseEntity<List<Livro>> listarClientes(){
+        List<Livro> listCli = livroService.listarCliente();
+        if(! listCli.isEmpty()){
+            return new ResponseEntity<>(listCli ,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }//GET  http://localhost:8010/vendas/cliente
+
+    
+    @PutMapping("/livro")
+    public ResponseEntity<Boolean> alterarLivro(@RequestBody Livro livro){
+       if(livroService.alterarLivro(livro)){
+           return new ResponseEntity<>(true, HttpStatus.OK);
+       }
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+    }//PUT  http://localhost:8010/vendas/cliente
+    
+    
+    @PostMapping("/livro")
+    public ResponseEntity<Long> incluirNovoCliente(@RequestBody Livro livro){
+        Long idLiv = livroService.incluirLivro(livro);
+        if(idLiv != null){
+            return new ResponseEntity<>(idLiv, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }//POST  http://localhost:8010/vendas/cliente
+    
+    
+    @DeleteMapping("/livro/{IdLivro}")
+    public ResponseEntity<Long> exluirLivro(@PathVariable ("IdLivro")Long IdLivro){
+        if(livroService.excluirLivro(IdLivro)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }       
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }//DELETE  http://localhost:8010/vendas/cliente/{id}
     
 }
