@@ -22,9 +22,7 @@ public class EmprestimoService {
         if(emprestimo.getIdEmprestimo() == null ){
             return null;
         }
-        if(emprestimo.getEstudante() == null ){
-            return null;
-        }
+      
         if(emprestimo.getDevolucao() == null || emprestimo.getDevolucao() == ""){
             return null;
         }
@@ -33,7 +31,7 @@ public class EmprestimoService {
     
     public boolean excluirEmprestimo(Long IdEmprestimo){
         if(emprestimoRepository.findById(IdEmprestimo).isPresent()){
-            emprestimoRepository.deleteById(Id);
+            emprestimoRepository.deleteById(IdEmprestimo);
             return true;
         }
         return false;
