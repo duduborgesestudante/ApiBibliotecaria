@@ -43,11 +43,6 @@ public class LivroService {
     public List<Livro> listarCliente(){
         return livroRepository.findAll();
     }
-    
-    
-    public Livro consultaLivroPorTitulo(String titulo){
-        return livroRepository.findByTitulo(titulo);
-    }
      
      
     public boolean alterarLivro(Livro livro){
