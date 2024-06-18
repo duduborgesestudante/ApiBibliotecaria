@@ -85,6 +85,14 @@ public class Emprestimo {
     public void setDevolucao(String devolucao) {
         this.devolucao = devolucao;
     }
+
+    public Estudante getEstudante() {
+        return estudante;
+    }
+
+    public void setEstudante(Estudante estudante) {
+        this.estudante = estudante;
+    }
     
     
     
