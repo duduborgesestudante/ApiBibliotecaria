@@ -7,13 +7,16 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EstudanteService {
-    private EstudanteRepository estudanteRepository;
     
-      public Long incluirEstudante(Estudante estudante){
+   @Autowired
+   private EstudanteRepository estudanteRepository;
+    
+   public Long incluirEstudante(Estudante estudante){
         
         if(estudante.getMatricula() == null || estudante.getNome() == null ||
            estudante.getSenha() == null || estudante.getEmail() == null){
@@ -24,15 +27,14 @@ public class EstudanteService {
         return estudanteRepository.save(estudante).getIdEstudante();
     }
     
-    public Estudante loginEstudante(Long matricula, String senha){
+   public Estudante loginEstudante(Long matricula, String senha){
         
         String senhaHash = "";
         Estudante estudanteBD = estudanteRepository.findByMatricula(matricula);
         if(estudanteBD != null){
             senhaHash = hashSenha(senha);
             String senhaBD = estudanteBD.getSenha();
-            //System.out.println("senha do banco...: " + senhaBD);
-            //System.out.println("senha do login...: " + senhaHash);
+            
             if( senhaHash.equals(senhaBD) ){               
                return estudanteBD;
             }
@@ -96,15 +98,12 @@ public class EstudanteService {
         
         Estudante estBD = estudanteRepository.getReferenceById(estudante.getIdEstudante());
         if(estBD != null){
-            if(estBD.getMatricula() != estudante.getMatricula() &&
-                estudanteRepository.findByMatricula(estudante.getMatricula()) != null){
-                return false;
-            }
             estBD.setTelefone(estudante.getTelefone());
             estBD.setMatricula(estudante.getMatricula());
             estBD.setEmail(estudante.getEmail());
             estBD.setSenha(estudante.getSenha());
             estBD.setNome(estudante.getNome());
+            
             estudanteRepository.save(estBD);
             return true;           
             }
