@@ -6,7 +6,10 @@ import com.senai.biblioadmin.entity.Livro;
 import com.senai.biblioadmin.repository.EmprestimoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class EmprestimoService {
     
    @Autowired

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author joao_cappeletti
  */
+@RestController
 public class EstudanteController {
     
      @Autowired
@@ -63,7 +65,7 @@ public class EstudanteController {
     }
     
     @DeleteMapping("/estudante/{IdEstudante}")
-    public ResponseEntity<Long> excluirCliente(@PathVariable ("IdEstudante")Long IdEstudante){
+    public ResponseEntity<Long> excluirEstudante(@PathVariable ("IdEstudante")Long IdEstudante){
         if(estudanteService.excluirEstudante(IdEstudante)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
