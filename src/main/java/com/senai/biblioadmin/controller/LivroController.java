@@ -29,7 +29,7 @@ public class LivroController {
             return new ResponseEntity<>(listCli ,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }//GET  http://localhost:8010/vendas/cliente
+    }// http://localhost:8010/biblio/
 
     
     @PutMapping("/livro")
@@ -38,7 +38,7 @@ public class LivroController {
            return new ResponseEntity<>(true, HttpStatus.OK);
        }
         return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
-    }//PUT  http://localhost:8010/vendas/cliente
+    }// http://localhost:8010/biblio/
     
     
     @PostMapping("/livro")
@@ -48,7 +48,7 @@ public class LivroController {
             return new ResponseEntity<>(idLiv, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.OK);
-    }//POST  http://localhost:8010/vendas/cliente
+    }// http://localhost:8010/biblio/
     
     
     @DeleteMapping("/livro/{IdLivro}")
@@ -57,6 +57,16 @@ public class LivroController {
             return new ResponseEntity<>(HttpStatus.OK);
         }       
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }//DELETE  http://localhost:8010/vendas/cliente/{id}
+    }// http://localhost:8010/biblio/
     
+    
+     @GetMapping("/livro/titulo/{titulo}")
+    public ResponseEntity<Livro> consultaEstudantePorMatricula(
+                                   @PathVariable("titulo") String titulo){
+        Livro livro = livroService.consultaLivroPorTitulo(titulo);
+        if(livro != null){
+            return new ResponseEntity<>(livro,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }// http://localhost:8010/biblio/
 }

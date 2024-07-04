@@ -75,4 +75,8 @@ public class LivroService {
         }
         return false;
     }
+    
+    public Livro consultaLivroPorTitulo(String titulo){
+        return livroRepository.findByTitulo(titulo);
+    }
 }

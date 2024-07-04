@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author joao_cappeletti
- */
+
 @RestController
 public class EstudanteController {
     
-     @Autowired
+    @Autowired
     private EstudanteService estudanteService;
     
     
@@ -39,16 +37,18 @@ public class EstudanteController {
     public ResponseEntity<Estudante> loginEstudante(@RequestBody Login login){
         
         Estudante estudante = estudanteService.loginEstudante(login.getMatricula(),login.getSenha());
-      
+       
         if(estudante != null){
             return new ResponseEntity<>(estudante,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);        
     }
+    
+    
     @GetMapping("/estudante")
     public ResponseEntity<List<Estudante>> listarEstudantes(){
         List<Estudante> listEst = estudanteService.listarEstudantes();
-        if(! listEst.isEmpty()){
+        if(!listEst.isEmpty()){
             return new ResponseEntity<>(listEst,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -65,7 +65,7 @@ public class EstudanteController {
     }
     
     @DeleteMapping("/estudante/{IdEstudante}")
-    public ResponseEntity<Long> excluirCliente(@PathVariable ("IdEstudante")Long IdEstudante){
+    public ResponseEntity<Long> excluirEstudante(@PathVariable ("IdEstudante")Long IdEstudante){
         if(estudanteService.excluirEstudante(IdEstudante)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -79,4 +79,5 @@ public class EstudanteController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+ 
 }

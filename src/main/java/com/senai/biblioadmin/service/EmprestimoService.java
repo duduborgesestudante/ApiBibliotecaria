@@ -7,6 +7,11 @@ import com.senai.biblioadmin.repository.EmprestimoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 503763fea6de844c3ef58a2417c6040a4afd6560
 @Service
 public class EmprestimoService {
     
