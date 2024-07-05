@@ -3,6 +3,8 @@ package com.senai.biblioadmin.controller;
 import com.senai.biblioadmin.entity.Estudante;
 import com.senai.biblioadmin.entity.Login;
 import com.senai.biblioadmin.service.EstudanteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,9 @@ public class EstudanteController {
     @Autowired
     private EstudanteService estudanteService;
     
-    
+    @Operation(summary = "Manter Estudantes",description = "Incluir Estudantes")
+    @ApiResponse(responseCode = "200", description = "Retorna o Id dos Estudantes cadastrados" )
+    @ApiResponse(responseCode = "406", description = "Informa erro no cadastro do estudante")
     @PostMapping("/estudante")
     public ResponseEntity<Long> incluirEstudante(@RequestBody Estudante estudante){
         
