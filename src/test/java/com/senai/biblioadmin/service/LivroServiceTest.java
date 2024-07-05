@@ -5,7 +5,6 @@
 package com.senai.biblioadmin.service;
 
 import com.senai.biblioadmin.entity.Livro;
-import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
