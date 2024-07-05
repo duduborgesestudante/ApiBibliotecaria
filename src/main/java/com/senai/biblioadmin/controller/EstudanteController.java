@@ -28,6 +28,7 @@ public class EstudanteController {
     @Operation(summary = "Manter Estudantes",description = "Incluir Estudantes")
     @ApiResponse(responseCode = "200", description = "Retorna o Id dos Estudantes cadastrados" )
     @ApiResponse(responseCode = "406", description = "Informa erro no cadastro do estudante")
+    
     @PostMapping("/estudante")
     public ResponseEntity<Long> incluirEstudante(@RequestBody Estudante estudante){
         
@@ -74,7 +75,6 @@ public class EstudanteController {
     @ApiResponse(responseCode = "200", description = "Retorna true se o Estudantes foi excluido" )
     @ApiResponse(responseCode = "404", description = "Informa erro de estudante não encontrado!")
     @Parameter(name = "IdEstudante do Estudante",required = true, description="Informe o IdEstudante para exclusão")
-    @PostMapping("/estudante")
     @DeleteMapping("/estudante/{IdEstudante}")
     public ResponseEntity<Boolean> excluirEstudante(@PathVariable ("IdEstudante")Long IdEstudante){
         if(estudanteService.excluirEstudante(IdEstudante)){

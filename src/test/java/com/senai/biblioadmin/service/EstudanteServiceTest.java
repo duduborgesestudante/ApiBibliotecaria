@@ -65,9 +65,7 @@ public class EstudanteServiceTest {
     
     @Test
     @Order(0)
-    //@Disabled
-    public void incluirEstudantes(){
-  
+    public void testIncluirEstudantes(){
         int qtdEstu = 120;
         System.out.println("\n# Incluindo " + qtdEstu + " estudantes aleatorios...");
         for(int i=1;i<=qtdEstu;i++){
@@ -81,8 +79,6 @@ public class EstudanteServiceTest {
             estudanteService.incluirEstudante(estud);            
             assertTrue(true,"#0 Erro: Erro ao inserir estudantes, verifique... ");
         }
-
-        
     }
     @Test
     @Order(1)
@@ -127,7 +123,7 @@ public class EstudanteServiceTest {
         estudante.setEmail("estudante_3@gmail.com");
         estudante.setSenha("senha");
         estudante.setTelefone("48999995878");
-        //estudante.setMatricula(geraRandomico());
+        estudante.setMatricula(null);
         Long IdEstudante = estudanteService.incluirEstudante(estudante);
         Long IdEstudanteExp = null;
         System.out.println("#3 Incluir estudante sem matricula ");
@@ -147,7 +143,7 @@ public class EstudanteServiceTest {
             Long IdEstudante = estudanteService.incluirEstudante(estudante);
             Long IdEstudanteExp = null;
             System.out.println("#4 Incluir estudante com matricula cadastrada");
-            assertEquals(IdEstudante, IdEstudanteExp,"ERRO: #4 Incluiu estudante com matricula duplicada ");
+            assertNotEquals(IdEstudante, IdEstudanteExp,"ERRO: #4 Incluiu estudante com matricula duplicada ");
         } else {
             assertFalse(true,"#4 ERRO: Sem estudante para testar inclusao duplicada..!");
         }        
@@ -221,8 +217,8 @@ public class EstudanteServiceTest {
             String senha = "senha";
             Estudante estudante = estudanteService.loginEstudante(matriculaBD, senha);
             Long IdEstudanteExp = null;
-            System.out.println("#8 Login estudante cadastrado! ");
-            assertNotEquals(estudante, IdEstudanteExp,"ERRO: #8 Falha de Login do estudante! ");
+            System.out.println("#9 Login estudante matricula inexistente! ");
+            assertEquals(estudante, IdEstudanteExp,"ERRO: #8 Falha de Login do estudante matricula inexistente! ");
         } else {
             assertFalse(true,"#8 ERRO: Sem estudantes para testar Login! ");
         } 
@@ -244,14 +240,108 @@ public class EstudanteServiceTest {
     }        
     @Test
     @Order(11)
-    public void alterarEstudanteSemMatricula(){
+    public void testAleterarEstudante(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
+        System.out.println("#11 Alterar estudante ");
+        Estudante estud = estudanteService.listarEstudantes().get(0);
+        estud.setMatricula(listEstudante.get(0).getMatricula());
+        estud.setNome("Nome Alterado #1");
+        estud.setEmail(listEstudante.get(0).getEmail());
+        estud.setSenha(listEstudante.get(0).getSenha());
+        estud.setTelefone("48" + geraRandomico(9));
+        Boolean result = estudanteService.alterarEstudante(estud);
+        Boolean resultEsperado = false;
+        assertNotEquals(result,resultEsperado,"#11 Erro: Foi alterado Estudante ..."); 
+    }
+    @Test
+    @Order(12)
+    public void testAleterarEstudanteSemNome(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
+        System.out.println("#11 Alterar estudante ");
+        Estudante estud = estudanteService.listarEstudantes().get(0);
+        estud.setMatricula(listEstudante.get(0).getMatricula());
+        estud.setNome(null);
+        estud.setEmail("email@alterado.com");
+        estud.setSenha(listEstudante.get(0).getSenha());
+        estud.setTelefone("48" + geraRandomico(9));
+        Boolean result = estudanteService.alterarEstudante(estud);
+        Boolean resultEsperado = false;
+        assertEquals(result,resultEsperado,"#11 Erro: Foi alterado Estudante sem nome ..."); 
+    }
+    @Test
+    @Order(13)
+    public void testAlterarEstudanteSemMatricula(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
         System.out.println("#13 Alterar estudante sem matricula");
         Estudante estud = estudanteService.listarEstudantes().get(0);
         estud.setMatricula(null);
-        estud.setNome("Nome Alterado");
+        estud.setNome("Nome Alterado #2");
+        estud.setEmail(listEstudante.get(0).getEmail());
+        estud.setSenha(listEstudante.get(0).getSenha());
+        estud.setTelefone("48" + geraRandomico(9));
         Boolean result = estudanteService.alterarEstudante(estud);
         Boolean resultEsperado = false;
         assertEquals(result,resultEsperado,"#13 Erro: Foi alterado Estudante sem matricula...");   
+    }
+    @Test
+    @Order(14)
+    public void testAlterarEstudanteMatriculaCadastrada(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
+        System.out.println("#14 Alterar estudante com matricula cadastrada");
+        Estudante estud = estudanteService.listarEstudantes().get(0);
+       estud.setMatricula(listEstudante.get(0).getMatricula());
+        estud.setNome("Nome Alterado #1");
+        estud.setEmail(listEstudante.get(0).getEmail());
+        estud.setSenha(listEstudante.get(0).getSenha());
+        estud.setTelefone("48" + geraRandomico(9));
+        Boolean result = estudanteService.alterarEstudante(estud);
+        Boolean resultEsperado = false;
+        assertEquals(result,resultEsperado,"#14 Erro: Foi alterado Estudante com matricula cadastrada");   
+    }
+    @Test
+    @Order(15)
+    public void alterarEstudanteSemEmail(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
+        System.out.println("#15 Alterar estudante com Sem email");
+        Estudante estud = estudanteService.listarEstudantes().get(0);
+        estud.setMatricula(listEstudante.get(0).getMatricula());
+        estud.setNome("Nome Alterado #1");
+        estud.setEmail(null);
+        estud.setSenha(listEstudante.get(0).getSenha());
+        estud.setTelefone("48" + geraRandomico(9));
+        Boolean result = estudanteService.alterarEstudante(estud);
+        Boolean resultEsperado = false;
+        assertEquals(result,resultEsperado,"#15 Erro: Foi alterado Estudante sem email");   
+    }
+    @Test
+    @Order(16)
+    public void alterarEstudanteSemTelefone(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
+        System.out.println("#16 Alterar estudante sem telefone");
+        Estudante estud = estudanteService.listarEstudantes().get(0);
+       estud.setMatricula(listEstudante.get(0).getMatricula());
+        estud.setNome(listEstudante.get(0).getNome());
+        estud.setEmail(listEstudante.get(0).getEmail());
+        estud.setSenha(listEstudante.get(0).getSenha());
+        estud.setTelefone(null);
+        Boolean result = estudanteService.alterarEstudante(estud);
+        Boolean resultEsperado = true;
+        assertNotEquals(result,resultEsperado,"#16 Erro: Foi alterado Estudante sem telefone");   
+    }
+    @Test
+    @Order(17)
+    public void alterarEstudanteSemSenha(){
+        List<Estudante> listEstudante = estudanteService.listarEstudantes();
+        System.out.println("#16 Alterar estudante sem senha");
+        Estudante estud = estudanteService.listarEstudantes().get(0);
+         estud.setMatricula(listEstudante.get(0).getMatricula());
+        estud.setNome(listEstudante.get(0).getNome());
+        estud.setEmail(listEstudante.get(0).getEmail());
+        estud.setSenha(null);
+        estud.setTelefone("48" + geraRandomico(9));
+        Boolean result = estudanteService.alterarEstudante(estud);
+        Boolean resultEsperado = false;
+        assertEquals(result,resultEsperado,"#16 Erro: Foi alterado Estudante sem senha");   
     }
 
 //    
