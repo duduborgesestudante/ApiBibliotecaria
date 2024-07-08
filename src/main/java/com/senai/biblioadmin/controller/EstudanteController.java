@@ -3,6 +3,9 @@ package com.senai.biblioadmin.controller;
 import com.senai.biblioadmin.entity.Estudante;
 import com.senai.biblioadmin.entity.Login;
 import com.senai.biblioadmin.service.EstudanteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +25,9 @@ public class EstudanteController {
     @Autowired
     private EstudanteService estudanteService;
     
-    
+    @Operation(summary = "Manter Estudantes",description = "Incluir Estudantes")
+    @ApiResponse(responseCode = "200", description = "Retorna o Id dos Estudantes cadastrados" )
+    @ApiResponse(responseCode = "406", description = "Informa erro no cadastro do estudante")
     @PostMapping("/estudante")
     public ResponseEntity<Long> incluirEstudante(@RequestBody Estudante estudante){
         
@@ -64,12 +69,17 @@ public class EstudanteController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
+    
+    @Operation(summary = "Manter Estudantes",description = "Excluir Estudantes cadastrados")
+    @ApiResponse(responseCode = "200", description = "Retorna true se o Estudantes foi excluido" )
+    @ApiResponse(responseCode = "404", description = "Informa erro de estudante não encontrado!")
+    @Parameter(name = "IdEstudante do Estudante",required = true, description="Informe o IdEstudante para exclusão")
     @DeleteMapping("/estudante/{IdEstudante}")
-    public ResponseEntity<Long> excluirEstudante(@PathVariable ("IdEstudante")Long IdEstudante){
+    public ResponseEntity<Boolean> excluirEstudante(@PathVariable ("IdEstudante")Long IdEstudante){
         if(estudanteService.excluirEstudante(IdEstudante)){
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(true,HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
     }
     @PutMapping("/estudante")
     public ResponseEntity<Boolean> alterarEstudante(@RequestBody Estudante estudante){

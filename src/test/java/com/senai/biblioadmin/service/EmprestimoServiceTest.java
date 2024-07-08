@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
+
 package com.senai.biblioadmin.service;
 
 import com.senai.biblioadmin.entity.Emprestimo;
@@ -158,9 +155,6 @@ public class EmprestimoServiceTest {
 //        EmprestimoService instance = new EmprestimoService();
 //        boolean expResult = false;
 //        boolean result = instance.alterarEmprestimo(emprestimo);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
     
 }
