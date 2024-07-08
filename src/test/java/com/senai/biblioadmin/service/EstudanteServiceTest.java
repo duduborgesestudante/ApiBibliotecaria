@@ -82,26 +82,6 @@
 //        }
 //    }
 //    @Test
-//    @Order(1)
-//    public void incluirEstudanteMatriculaCadastrada(){
-//        System.out.println("\n#######################################");
-//        System.out.println("#######  Inicio dos Testes ############\n");
-//        System.out.println("#4 Incluir estudante com matricula cadastrada");
-//        Estudante estud = new Estudante();
-//        estud.setEmail("estudante@email.com");
-//        estud.setNome("Nome Estudante#4");
-//        estud.setSenha("senha");
-//        estud.setTelefone("48" + geraRandomico(9));
-//        estud.setIsBiblio(false);
-//        List<Estudante> listaEstud = estudanteService.listarEstudantes();
-//        Long matricula = listaEstud.get(0).getMatricula();
-//        estud.setMatricula(matricula);
-//        Long IdEstudante = estudanteService.incluirEstudante(estud);
-//        Long idEsperado = null;
-//        assertEquals(IdEstudante, idEsperado,"#4 ERRO: Foi inserido Estudante com matricula duplicada...");        
-//    }
-//    
-//    @Test
 //    @Order(2)
 //    public void testIncluirEstudanteSemNome() {
 //
@@ -133,22 +113,21 @@
 //    }
 //    @Test
 //    @Order(4)
-//    public void testIncluirEstudanteMatriculaCadastrada() {
-//        List<Estudante> listEstudante = estudanteService.listarEstudantes();
-//        if( ! listEstudante.isEmpty() ){
-//            Estudante estudante = new Estudante();
-//            estudante.setNome("Estudante Teste #4");
-//            estudante.setEmail("estudante_4@gmail.com");
-//            estudante.setSenha("senha");
-//            estudante.setTelefone("48999995878");
-//            estudante.setMatricula(listEstudante.get(0).getMatricula());
-//            Long IdEstudante = estudanteService.incluirEstudante(estudante);
-//            Long IdEstudanteExp = null;
-//            System.out.println("#4 Incluir estudante com matricula cadastrada");
-//            assertNotEquals(IdEstudante, IdEstudanteExp,"ERRO: #4 Incluiu estudante com matricula duplicada ");
-//        } else {
-//            assertFalse(true,"#4 ERRO: Sem estudante para testar inclusao duplicada..!");
-//        }        
+//    public void incluirEstudanteMatriculaCadastrada(){
+//        System.out.println("\n#######################################");
+//        System.out.println("#######  Inicio dos Testes ############\n");
+//        System.out.println("#4 Incluir estudante com matricula cadastrada");
+//        Estudante estud = new Estudante();
+//        estud.setEmail("estudante@email.com");
+//        estud.setNome("Nome Estudante#4");
+//        estud.setSenha("senha");
+//        estud.setTelefone("48 99999999");
+//        List<Estudante> listaEstud = estudanteService.listarEstudantes();
+//        Long matricula = listaEstud.get(0).getMatricula();
+//        estud.setMatricula(matricula);
+//        Long IdEstudante = estudanteService.incluirEstudante(estud);
+//        Long idEsperado = null;
+//        assertEquals(IdEstudante, idEsperado,"#4 ERRO: Foi inserido Estudante com matricula duplicada...");        
 //    }
 //    @Test
 //    @Order(5)
