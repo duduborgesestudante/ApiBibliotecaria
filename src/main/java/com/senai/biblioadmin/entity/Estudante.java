@@ -31,11 +31,25 @@ public class Estudante {
     @Column(nullable=false)
     private String senha;
     
-
+    @Column(nullable = false)
+    private Boolean isBiblio;
+    
+    
+    
+    
+    // ------------------------------get and setter ------------------------------ //
     public Long getIdEstudante() {
         return IdEstudante;
     }
 
+    public Boolean getIsBiblio() {
+        return isBiblio;
+    }
+
+    public void setIsBiblio(Boolean isBiblio) {
+        this.isBiblio = isBiblio;
+    }
+    
     public void setIdEstudante(Long IdEstudante) {
         this.IdEstudante = IdEstudante;
     }

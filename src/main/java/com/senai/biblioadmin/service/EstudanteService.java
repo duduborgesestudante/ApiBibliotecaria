@@ -22,6 +22,9 @@ public class EstudanteService {
            estudante.getSenha() == null || estudante.getEmail() == null){
             return null;
         }
+        if(estudanteRepository.findByMatricula(estudante.getMatricula()) != null){
+            return null;
+        }
         String senhaCod = hashSenha(estudante.getSenha());
         estudante.setSenha(senhaCod);
         return estudanteRepository.save(estudante).getIdEstudante();

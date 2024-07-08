@@ -19,12 +19,7 @@ public class EmprestimoService {
         if(emprestimo.getLivro() == null ){
             return null;
         }
-        if(emprestimo.getMatricula() == null ){
-            return null;
-        }
-        if(emprestimo.getIdEmprestimo() == null ){
-            return null;
-        }
+       
       
         if(emprestimo.getDevolucao() == null || emprestimo.getDevolucao() == ""){
             return null;
@@ -61,9 +56,7 @@ public class EmprestimoService {
         if(emprestimo.getLivro() == null ){
             return false;
         }
-        if(emprestimo.getMatricula() == null ){
-            return false;
-        }
+     
         if(emprestimo.getIdEmprestimo() == null ){
             return false;
         }
@@ -81,7 +74,6 @@ public class EmprestimoService {
                 return false;
             }
             empBD.setLivro(emprestimo.getLivro());
-            empBD.setMatricula(emprestimo.getMatricula());
             empBD.setIdEmprestimo(emprestimo.getIdEmprestimo());
             empBD.setEstudante(emprestimo.getEstudante());
             empBD.setDevolucao(emprestimo.getDevolucao());

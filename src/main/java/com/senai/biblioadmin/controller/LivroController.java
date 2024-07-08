@@ -23,8 +23,8 @@ public class LivroController {
     
     
     @GetMapping("/livro")
-    public ResponseEntity<List<Livro>> listarClientes(){
-        List<Livro> listCli = livroService.listarCliente();
+    public ResponseEntity<List<Livro>> listarLivros(){
+        List<Livro> listCli = livroService.listarLivro();
         if(! listCli.isEmpty()){
             return new ResponseEntity<>(listCli ,HttpStatus.OK);
         }

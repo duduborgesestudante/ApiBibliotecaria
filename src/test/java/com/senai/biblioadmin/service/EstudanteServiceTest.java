@@ -78,6 +78,7 @@ public class EstudanteServiceTest {
             String mat = this.geraRandomico(6);
             estud.setMatricula( Long.valueOf(mat) );
             estud.setTelefone("48" + geraRandomico(9));
+            estud.setIsBiblio(false);
             estudanteService.incluirEstudante(estud);            
             assertTrue(true,"#0 Erro: Erro ao inserir estudantes, verifique... ");
         }
@@ -95,6 +96,7 @@ public class EstudanteServiceTest {
         estud.setNome("Nome Estudante#4");
         estud.setSenha("senha");
         estud.setTelefone("48" + geraRandomico(9));
+        estud.setIsBiblio(false);
         List<Estudante> listaEstud = estudanteService.listarEstudantes();
         Long matricula = listaEstud.get(0).getMatricula();
         estud.setMatricula(matricula);
@@ -110,6 +112,7 @@ public class EstudanteServiceTest {
         Estudante estud = estudanteService.listarEstudantes().get(0);
         estud.setMatricula(null);
         estud.setNome("Nome Alterado");
+        estud.setIsBiblio(false);
         Boolean result = estudanteService.alterarEstudante(estud);
         Boolean resultEsperado = false;
         assertEquals(result,resultEsperado,"#13 Erro: Foi alterado Estudante sem matricula...");

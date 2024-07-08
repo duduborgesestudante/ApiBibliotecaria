@@ -40,7 +40,7 @@ public class LivroService {
     }
     
     
-    public List<Livro> listarCliente(){
+    public List<Livro> listarLivro(){
         return livroRepository.findAll();
     }
      

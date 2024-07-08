@@ -27,12 +27,9 @@ public class Emprestimo {
     private Livro livro;
     
     @Column(nullable = false)
-    private Long matricula;
-    
-    @Column(nullable = false)
     private Date dataEmprestimo;
     
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Date dataEntrega;
     
     @Column(nullable = true)
@@ -52,14 +49,6 @@ public class Emprestimo {
 
     public void setLivro(Livro livro) {
         this.livro = livro;
-    }
-
-    public Long getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(Long matricula) {
-        this.matricula = matricula;
     }
 
     public Date getDataEmprestimo() {
