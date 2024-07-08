@@ -31,6 +31,14 @@ public class EmprestimoController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/emprestimo/id/{IdEmprestimo}")
+    public ResponseEntity<Emprestimo> consultaEmprestimoPorId(@PathVariable("IdEmprestimo") Long IdEmprestimo){
+        Emprestimo emprestimo = emprestimoService.consultaEmprestimoPorId(IdEmprestimo);
+        if(emprestimo != null){
+            return new ResponseEntity<>(emprestimo ,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
     
     @PutMapping("/emprestimo")

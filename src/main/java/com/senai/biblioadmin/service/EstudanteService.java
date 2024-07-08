@@ -106,6 +106,7 @@ public class EstudanteService {
             estBD.setEmail(estudante.getEmail());
             estBD.setSenha(estudante.getSenha());
             estBD.setNome(estudante.getNome());
+            estBD.setIsBiblio(estudante.getIsBiblio());
             
             estudanteRepository.save(estBD);
             return true;           
