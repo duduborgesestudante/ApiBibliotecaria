@@ -23,7 +23,7 @@ public class EmprestimoController {
     private EmprestimoService emprestimoService;
     
     
-    @GetMapping("/emprestimo")
+        @GetMapping("/emprestimo")
     public ResponseEntity<List<Emprestimo>> listarEmprestimos(){
         List<Emprestimo> listEmp = emprestimoService.listarEmprestimos();
         if(! listEmp.isEmpty()){
