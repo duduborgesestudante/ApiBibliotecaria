@@ -56,7 +56,7 @@ public class EmprestimoController {
         if(idEmp != null){
             return new ResponseEntity<>(idEmp, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
     @DeleteMapping("/emprestimo/{IdEmprestimo}")

@@ -16,12 +16,13 @@ public class EmprestimoService {
    private EmprestimoRepository emprestimoRepository;
    
     public Long incluirEmprestimo(Emprestimo emprestimo){
-        if(emprestimo.getLivro() == null ){
+        if(emprestimo.getLivro() == null  ){
             return null;
         }
-       
-      
-        if(emprestimo.getDevolucao() == null || emprestimo.getDevolucao() == ""){
+        if(emprestimo.getDataEntrega()== null ){
+            return null;
+        }
+          if(emprestimo.getDataEmprestimo()== null ){
             return null;
         }
         return emprestimoRepository.save(emprestimo).getIdEmprestimo();      

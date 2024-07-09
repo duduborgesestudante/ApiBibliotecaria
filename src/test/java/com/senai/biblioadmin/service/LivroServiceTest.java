@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.Random;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -22,6 +23,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class LivroServiceTest {
     @Autowired
     private LivroService livroService;
+    
+    private final Random random = new Random();
+    
+    private final String nomes[] = { "Ana", "Anita", "Anabela", "Aroldo",
+                       "Braulio", "Carlos", "Diogo", "Fernando","Arnaldo", "Antonio","Abel",
+                       "Giuliano", "Gary", "James", "Steave", "Drauzio", "Denis", "Evandro", "Ester",
+                       "Michel", "Joe", "John", "Pedro", "Eva", "Fábio", "Gil",
+                       "Taylor", "Marcos","Nora", "Yolanda", "Gilson", "Heitor", "Helio" };
+    
+    private final String sobrenome[] = { "Braga", "Velasques", "Gomes", "Costa",
+                       "Silva", "Santos", "Biden", "Deere", "Pires", "Pereira", "Teixeira", "Trevor",
+                       "Cintra", "Magalhães", "Melo", "Ribeiro","Santana", "Carvalho", "Mestieri",
+                       "Oliveira", "Ferreira", "Marchi", "Rocha", "Sauro", "Mendes", "Leite", "Vilani",
+                       "Santos", "Benedetti","Statan", "Collin", "Vieira", "Fernandes", "Pinheiro" };
+    
+//    
     
     public LivroServiceTest() {
     }
@@ -45,69 +62,73 @@ public class LivroServiceTest {
     @Test
     @Order(1)
     public void testIncluirLivroOk() {
+        int qtdLivro = 30;
         System.out.println("\n##### Inicio da rotina de Testes #####");
+        for(int i=1;i<=qtdLivro;i++){
         Livro livro = new Livro();
-        livro.setTitulo("Livro Teste #1");
-        livro.setAutor("ALbert Newton");
+        livro.setTitulo("Livro Teste #" + i);
+        livro.setAutor(geraNomes());
         livro.setEditora("Companhia das Letras");
         livro.setAno("2024");
         Long IdLivro = livroService.incluirLivro(livro);
         Long IdLivroExp = null;
-        System.out.println("#1 Incluir livro ok! ");
         assertNotEquals(IdLivro, IdLivroExp,"ERRO: #1 Nao incluiu livro corretamente ");
+        }
+                System.out.println("#1 Incluir livro ok! ");
+
     }
-    @Test
-    @Order(2)
-    public void testIncluirLivroSemTitulo() {
-        Livro livro = new Livro();
-        livro.setTitulo("Livro Teste #2");
-        livro.setAutor("ALbert Newton");
-        livro.setEditora("Companhia das Letras");
-        livro.setAno("2024");
-        Long IdLivro = livroService.incluirLivro(livro);
-        Long IdLivroExp = null;
-        System.out.println("#1 Incluir livro sem título! ");
-        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #2 Incluiu livro sem título ");
-    }
-    @Test
-    @Order(3)
-    public void testIncluirLivroSemAutor() {
-        Livro livro = new Livro();
-        livro.setTitulo("Livro Teste #3");
-        livro.setAutor("ALbert Newton");
-        livro.setEditora("Companhia das Letras");
-        livro.setAno("2024");
-        Long IdLivro = livroService.incluirLivro(livro);
-        Long IdLivroExp = null;
-        System.out.println("#1 Incluir livro sem autor! ");
-        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #3 Incluiu livro sem autor!");
-    }
-    @Test
-    @Order(4)
-    public void testIncluirLivroSemEditora() {
-        Livro livro = new Livro();
-        livro.setTitulo("Livro Teste #3");
-        livro.setAutor("ALbert Newton");
-        livro.setEditora("Companhia das Letras");
-        livro.setAno("2024");
-        Long IdLivro = livroService.incluirLivro(livro);
-        Long IdLivroExp = null;
-        System.out.println("#1 Incluir livro sem editora! ");
-        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #4 Incluiu livro sem editora!");       
-    }
-    @Test
-    @Order(5)
-    public void testIncluirLivroSemAno() {
-        Livro livro = new Livro();
-        livro.setTitulo("Livro Teste #3");
-        livro.setAutor("ALbert Newton");
-        livro.setEditora("Companhia das Letras");
-        livro.setAno("2024");
-        Long IdLivro = livroService.incluirLivro(livro);
-        Long IdLivroExp = null;
-        System.out.println("#1 Incluir livro sem eano! ");
-        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #5 Incluiu livro sem ano!");
-    }
+//    @Test
+//    @Order(2)
+//    public void testIncluirLivroSemTitulo() {
+//        Livro livro = new Livro();
+//        livro.setTitulo("Livro Teste #2");
+//        livro.setAutor("ALbert Newton");
+//        livro.setEditora("Companhia das Letras");
+//        livro.setAno("2024");
+//        Long IdLivro = livroService.incluirLivro(livro);
+//        Long IdLivroExp = null;
+//        System.out.println("#1 Incluir livro sem título! ");
+//        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #2 Incluiu livro sem título ");
+//    }
+//    @Test
+//    @Order(3)
+//    public void testIncluirLivroSemAutor() {
+//        Livro livro = new Livro();
+//        livro.setTitulo("Livro Teste #3");
+//        livro.setAutor("ALbert Newton");
+//        livro.setEditora("Companhia das Letras");
+//        livro.setAno("2024");
+//        Long IdLivro = livroService.incluirLivro(livro);
+//        Long IdLivroExp = null;
+//        System.out.println("#1 Incluir livro sem autor! ");
+//        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #3 Incluiu livro sem autor!");
+//    }
+//    @Test
+//    @Order(4)
+//    public void testIncluirLivroSemEditora() {
+//        Livro livro = new Livro();
+//        livro.setTitulo("Livro Teste #3");
+//        livro.setAutor("ALbert Newton");
+//        livro.setEditora("Companhia das Letras");
+//        livro.setAno("2024");
+//        Long IdLivro = livroService.incluirLivro(livro);
+//        Long IdLivroExp = null;
+//        System.out.println("#1 Incluir livro sem editora! ");
+//        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #4 Incluiu livro sem editora!");       
+//    }
+//    @Test
+//    @Order(5)
+//    public void testIncluirLivroSemAno() {
+//        Livro livro = new Livro();
+//        livro.setTitulo("Livro Teste #3");
+//        livro.setAutor("ALbert Newton");
+//        livro.setEditora("Companhia das Letras");
+//        livro.setAno("2024");
+//        Long IdLivro = livroService.incluirLivro(livro);
+//        Long IdLivroExp = null;
+//        System.out.println("#1 Incluir livro sem eano! ");
+//        assertNotEquals(IdLivro, IdLivroExp,"ERRO: #5 Incluiu livro sem ano!");
+//    }
 
 //    /**
 //     * Test of excluirLivro method, of class LivroService.
@@ -167,5 +188,12 @@ public class LivroServiceTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
+    
+    public String geraNomes(){
+        int idxnome = random.nextInt(nomes.length -1);
+        int idxsobre = random.nextInt(sobrenome.length -1);
+        return nomes[idxnome] + " " + sobrenome[idxsobre];
+    }
+    
     
 }

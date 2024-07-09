@@ -28,6 +28,7 @@ public class EstudanteController {
     @Operation(summary = "Manter Estudantes",description = "Incluir Estudantes")
     @ApiResponse(responseCode = "200", description = "Retorna o Id dos Estudantes cadastrados" )
     @ApiResponse(responseCode = "406", description = "Informa erro no cadastro do estudante")
+    
     @PostMapping("/estudante")
     public ResponseEntity<Long> incluirEstudante(@RequestBody Estudante estudante){
         

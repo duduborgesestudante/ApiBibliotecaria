@@ -51,8 +51,8 @@ public class LivroController {
     }// http://localhost:8010/biblio/
     
     
-    @DeleteMapping("/livro/{IdLivro}")
-    public ResponseEntity<Long> exluirLivro(@PathVariable ("IdLivro")Long IdLivro){
+    @DeleteMapping("/livro/id/{IdLivro}")
+    public ResponseEntity<Long> exluirLivro(@PathVariable ("IdLivro") Long IdLivro){
         if(livroService.excluirLivro(IdLivro)){
             return new ResponseEntity<>(HttpStatus.OK);
         }       
