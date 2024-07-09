@@ -2,6 +2,7 @@ package com.senai.biblioadmin.service;
 
 import com.senai.biblioadmin.entity.Livro;
 import com.senai.biblioadmin.repository.EmprestimoRepository;
+import com.senai.biblioadmin.repository.LivroList;
 import com.senai.biblioadmin.repository.LivroRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +75,7 @@ public class LivroService {
         return false;
     }
     
-    public Livro consultaLivroPorTitulo(String titulo) {
+    public List<LivroList> consultaLivroPorTitulo(String titulo) {
         return livroRepository.findByTitulo(titulo);
     }
 }

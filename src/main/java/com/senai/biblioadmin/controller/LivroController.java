@@ -2,6 +2,7 @@
 package com.senai.biblioadmin.controller;
 
 import com.senai.biblioadmin.entity.Livro;
+import com.senai.biblioadmin.repository.LivroList;
 import com.senai.biblioadmin.service.LivroService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,10 @@ public class LivroController {
     
     
      @GetMapping("/livro/titulo/{titulo}")
-    public ResponseEntity<Livro> consultaEstudantePorMatricula(
+    public ResponseEntity<List<LivroList>> consultaEstudantePorMatricula(
                                    @PathVariable("titulo") String titulo){
-        Livro livro = livroService.consultaLivroPorTitulo(titulo);
-        if(livro != null){
+        List<LivroList> livro = livroService.consultaLivroPorTitulo(titulo);
+        if(!livro.isEmpty()){
             return new ResponseEntity<>(livro,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
