@@ -1,0 +1,16 @@
+com/senai/biblioadmin/entity/Login.class
+com/senai/biblioadmin/controller/LivroController.class
+com/senai/biblioadmin/entity/Livro.class
+com/senai/biblioadmin/service/EstudanteService.class
+com/senai/biblioadmin/service/LivroService.class
+com/senai/biblioadmin/CorsConfig.class
+com/senai/biblioadmin/service/EmprestimoService.class
+com/senai/biblioadmin/repository/LivroList.class
+com/senai/biblioadmin/entity/Emprestimo.class
+com/senai/biblioadmin/controller/EstudanteController.class
+com/senai/biblioadmin/controller/EmprestimoController.class
+com/senai/biblioadmin/repository/EstudanteRepository.class
+com/senai/biblioadmin/entity/Estudante.class
+com/senai/biblioadmin/BiblioadminApplication.class
+com/senai/biblioadmin/repository/LivroRepository.class
+com/senai/biblioadmin/repository/EmprestimoRepository.class
