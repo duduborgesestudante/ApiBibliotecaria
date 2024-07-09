@@ -25,6 +25,7 @@ public class EstudanteService {
         if(estudanteRepository.findByMatricula(estudante.getMatricula()) != null){
             return null;
         }
+        
         String senhaCod = hashSenha(estudante.getSenha());
         estudante.setSenha(senhaCod);
         return estudanteRepository.save(estudante).getIdEstudante();
