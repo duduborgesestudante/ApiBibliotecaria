@@ -7,7 +7,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class Livro {
     @Column(nullable = false)
     private String ano;
 
-     @OneToMany(mappedBy = "livro", cascade = CascadeType.ALL,fetch=FetchType.LAZY, orphanRemoval = true)
-    private List<Emprestimo> emprestimos;
+    @OneToOne( cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+    private Emprestimo emprestimos;
 
     // GETS AND SETTERS
 
@@ -76,11 +77,12 @@ public class Livro {
         this.ano = ano;
     }
 
-    public List<Emprestimo> getEmprestimos() {
+    public Emprestimo getEmprestimos() {
         return emprestimos;
     }
 
-    public void setEmprestimos(List<Emprestimo> emprestimos) {
+    public void setEmprestimos(Emprestimo emprestimos) {
         this.emprestimos = emprestimos;
     }
+
 }

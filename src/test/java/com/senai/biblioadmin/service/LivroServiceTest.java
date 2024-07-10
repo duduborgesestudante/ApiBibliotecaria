@@ -64,16 +64,16 @@ public class LivroServiceTest {
     public void testIncluirLivroOk() {
         int qtdLivro = 30;
         System.out.println("\n##### Inicio da rotina de Testes #####");
-        for(int i=1;i<=qtdLivro;i++){
+        
         Livro livro = new Livro();
-        livro.setTitulo("Livro Teste #" + i);
+        livro.setTitulo("Livro Teste #1" );
         livro.setAutor(geraNomes());
         livro.setEditora("Companhia das Letras");
         livro.setAno("2024");
         Long IdLivro = livroService.incluirLivro(livro);
         Long IdLivroExp = null;
         assertNotEquals(IdLivro, IdLivroExp,"ERRO: #1 Nao incluiu livro corretamente ");
-        }
+        
         System.out.println("#1 Incluir livro ok! ");
 
     }

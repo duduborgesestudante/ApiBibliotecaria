@@ -78,4 +78,7 @@ public class LivroService {
     public List<LivroList> consultaLivroPorTitulo(String titulo) {
         return livroRepository.findByTitulo(titulo);
     }
+    public Livro consultarLivroPorId(Long IdLivro){
+       return livroRepository.findById(IdLivro).get();
+   }
 }

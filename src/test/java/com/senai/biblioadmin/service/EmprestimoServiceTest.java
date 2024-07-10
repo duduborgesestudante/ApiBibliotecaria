@@ -4,6 +4,7 @@ package com.senai.biblioadmin.service;
 import com.senai.biblioadmin.entity.Emprestimo;
 import com.senai.biblioadmin.entity.Estudante;
 import com.senai.biblioadmin.entity.Livro;
+import jakarta.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import static java.time.Instant.now;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,21 +56,34 @@ public class EmprestimoServiceTest {
 
     
     @Test
-    public void testIncluirEmprestimo() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.of("PT", "BR")); 
-        System.out.println("incluirEmprestimo");
-        Emprestimo emprestimo = new Emprestimo();
-        emprestimo.setDataEmprestimo(sdf.parse("31/10/2006"));
-        emprestimo.setDataEntrega(sdf.parse("06/11/2006"));
-        emprestimo.setDevolucao("nok");
-        List<Estudante> lista = estudanteService.listarEstudantes();
-        emprestimo.setEstudante(lista.get(0));
-        List<Livro> listaLivro = livroService.listarLivro();
-        emprestimo.setLivro(listaLivro.get(0));
-        Long idEmprestimo = emprestimoService.incluirEmprestimo(emprestimo);
-        Long expResult = null;
-        assertNotEquals(idEmprestimo, expResult, "Erro: Não incluiu emprestimo correto!");
-    }
+public void testIncluirEmprestimo() throws ParseException {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.of("PT", "BR")); 
+    System.out.println("#1 incluirEmprestimo");
+    
+    // Criar e configurar o emprestimo
+    Emprestimo emprestimo = new Emprestimo();
+    emprestimo.setDataEmprestimo(sdf.parse("31/10/2006"));
+    emprestimo.setDataEntrega(sdf.parse("06/11/2006"));
+    emprestimo.setDevolucao("nok");
+
+    // Obter um estudante gerenciado
+    List<Estudante> lista = estudanteService.listarEstudantes();
+    Estudante estudante = lista.get(0);
+    estudante = estudanteService.consultaEstudantePorId(estudante.getIdEstudante()); // Certifique-se de que o estudante esteja anexado
+    emprestimo.setEstudante(estudante);
+
+    // Obter um livro gerenciado
+    List<Livro> listaLivro = livroService.listarLivro();
+    Livro livro = listaLivro.get(0);
+    livro = livroService.consultarLivroPorId(livro.getIdLivro()); // Certifique-se de que o livro esteja anexado
+    emprestimo.setLivro(livro);
+
+    // Persistir o emprestimo
+    Long idEmprestimo = emprestimoService.incluirEmprestimo(emprestimo);
+
+    Long expResult = null;
+    assertNotEquals(idEmprestimo, expResult, "Erro: Não incluiu emprestimo correto!");
+}
 
     /**
      * Test of excluirEmprestimo method, of class EmprestimoService.
