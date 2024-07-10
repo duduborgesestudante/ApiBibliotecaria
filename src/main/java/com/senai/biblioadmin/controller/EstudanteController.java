@@ -69,6 +69,15 @@ public class EstudanteController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/estudante/id/{IdEstudante}")
+    public ResponseEntity<Estudante> consultaEstudantePorId(
+                                   @PathVariable("IdEstudante") Long IdEstudante){
+        Estudante estudante = estudanteService.consultaEstudantePorId(IdEstudante);
+        if(estudante != null){
+            return new ResponseEntity<>(estudante,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     
     
     @Operation(summary = "Manter Estudantes",description = "Excluir Estudantes cadastrados")
