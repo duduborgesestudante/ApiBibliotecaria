@@ -25,7 +25,7 @@ public class Emprestimo {
     @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private Estudante estudante;
     
-    @OneToOne( cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private Livro livro;
     
     @Column(nullable = false)

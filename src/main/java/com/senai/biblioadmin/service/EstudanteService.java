@@ -2,13 +2,16 @@
 package com.senai.biblioadmin.service;
 
 import com.senai.biblioadmin.entity.Estudante;
+import com.senai.biblioadmin.repository.EmprestimoRepository;
 import com.senai.biblioadmin.repository.EstudanteRepository;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EstudanteService {
@@ -16,6 +19,9 @@ public class EstudanteService {
    @Autowired
    private EstudanteRepository estudanteRepository;
     
+   @Autowired
+    private EmprestimoRepository emprestimoRepository;
+   
    public Long incluirEstudante(Estudante estudante){
         
         if(estudante.getMatricula() == null || estudante.getNome() == null ||
@@ -67,12 +73,18 @@ public class EstudanteService {
 
 
     
-    public boolean excluirEstudante(Long IdEstudante){
-        if(estudanteRepository.findById(IdEstudante).isPresent()){
-            estudanteRepository.deleteById(IdEstudante);
+     @Transactional
+        public boolean excluirEstudante(Long idEstudante) {
+        Optional<Estudante> estudanteOptional = estudanteRepository.findById(idEstudante);
+
+        if (estudanteOptional.isPresent()) {
+            Estudante estudante = estudanteOptional.get();
+            estudante.getEmprestimo().clear();
+            estudanteRepository.delete(estudante);
             return true;
         }
-        return false;
+
+        return false; 
     }
     
     public Estudante consultaEstudantePorId(Long IdEstudante){

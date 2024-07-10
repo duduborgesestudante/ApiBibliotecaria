@@ -38,9 +38,7 @@ public class Estudante {
     @Column(nullable = false)
     private Boolean isBiblio;
     
-    @OneToMany(fetch=FetchType.LAZY, 
-            orphanRemoval = true, 
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Emprestimo> emprestimo;
     
     
