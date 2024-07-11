@@ -8,19 +8,30 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.lang.Integer;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EstudanteService {
     
+   
+    
+    
    @Autowired
    private EstudanteRepository estudanteRepository;
     
-   @Autowired
-    private EmprestimoRepository emprestimoRepository;
+   @Value("${biblio.registros.pag}")
+   private int regPaginas;
+    
+   private Pageable pageable;
+   
    
    public Long incluirEstudante(Estudante estudante){
         
@@ -95,10 +106,19 @@ public class EstudanteService {
         return estudanteRepository.findByMatricula(matricula);
     }
     
-    public List<Estudante> listarEstudantes(){
-        
-        return estudanteRepository.findAll();
-    }
+    
+    public List<Estudante> listarEstudantes(Integer pagina){
+       
+       if(pagina == null || pagina == 0) { pagina = 1; } 
+       pagina = (pagina -1);
+       Pageable pagsort = PageRequest.of(pagina,regPaginas,Sort.by("nome").ascending());
+       List<Estudante> lestud = estudanteRepository.findAll(pagsort).getContent();
+       if(lestud.isEmpty()){
+           return null;
+       } else {
+           return lestud;
+       }
+   }
     
     public boolean alterarEstudante(Estudante estudante){
 

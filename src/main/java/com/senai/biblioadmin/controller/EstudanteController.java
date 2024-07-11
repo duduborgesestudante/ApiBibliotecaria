@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
+import java.lang.Integer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,11 +52,11 @@ public class EstudanteController {
     }
     
     
-    @GetMapping("/estudante")
-    public ResponseEntity<List<Estudante>> listarEstudantes(){
-        List<Estudante> listEst = estudanteService.listarEstudantes();
-        if(!listEst.isEmpty()){
-            return new ResponseEntity<>(listEst,HttpStatus.OK);
+    @GetMapping("/estudante/pag/{pagina}")
+    public ResponseEntity<List<Estudante>> listarEstudantesPaginando(@PathVariable("pagina") Integer pagina){
+        List<Estudante> estude = estudanteService.listarEstudantes(pagina);
+        if(estude != null){
+            return new ResponseEntity<>(estude,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
