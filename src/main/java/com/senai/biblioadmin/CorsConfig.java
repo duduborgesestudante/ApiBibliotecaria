@@ -17,7 +17,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:5173"); // Allow requests from this origin
         config.addAllowedOrigin("http://127.0.0.1:5173"); // Allow requests from this origin
-        config.addAllowedOrigin("https://3352nwk5-5173.brs.devtunnels.ms");
+        config.addAllowedOrigin("https://biblioadmin.vercel.app");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
